@@ -1,4 +1,4 @@
-package co.com.sofka.questions.usecases;
+package co.com.sofka.questions.usecases.question;
 
 import co.com.sofka.questions.mapper.MapperUtils;
 import co.com.sofka.questions.model.QuestionDTO;

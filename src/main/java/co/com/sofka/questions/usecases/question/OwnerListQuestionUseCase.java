@@ -1,4 +1,4 @@
-package co.com.sofka.questions.usecases;
+package co.com.sofka.questions.usecases.question;
 
 import co.com.sofka.questions.mapper.MapperUtils;
 import co.com.sofka.questions.model.QuestionDTO;
@@ -7,23 +7,23 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import reactor.core.publisher.Flux;
 
-import java.util.function.Supplier;
+import java.util.function.Function;
 
 @Service
 @Validated
-public class ListQuestionsUseCase implements Supplier<Flux<QuestionDTO>> {
+public class OwnerListQuestionUseCase implements Function<String, Flux<QuestionDTO>> {
     private final QuestionRepository questionRepository;
     private final MapperUtils mapperUtils;
 
-    public ListQuestionsUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository) {
+    public OwnerListQuestionUseCase(MapperUtils mapperUtils, QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
         this.mapperUtils = mapperUtils;
     }
 
+
     @Override
-    public Flux<QuestionDTO> get() {
-        return questionRepository.findAll()
+    public Flux<QuestionDTO> apply(String userId) {
+        return questionRepository.findByUserId(userId)
                 .map(mapperUtils.mapEntityToQuestion());
     }
-
 }

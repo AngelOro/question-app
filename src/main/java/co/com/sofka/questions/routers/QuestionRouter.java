@@ -26,6 +26,19 @@ public class QuestionRouter {
     }
 
     @Bean
+    public RouterFunction<ServerResponse> getOwnerAll(OwnerListQuestionUseCase ownerListUseCase) {
+        return route(
+                GET("/getOwnerAll/{userId}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(ownerListUseCase.apply(
+                                request.pathVariable("userId")),
+                                QuestionDTO.class)
+                        )
+        );
+    }
+
+    @Bean
     public RouterFunction<ServerResponse> createQuestion(CreateUseCase createUseCase) {
         return route(POST("/create").and(accept(MediaType.APPLICATION_JSON)),
                 request -> request.bodyToMono(QuestionDTO.class)

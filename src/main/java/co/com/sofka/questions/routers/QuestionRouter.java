@@ -88,4 +88,17 @@ public class QuestionRouter {
         );
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> getFilter(GetFilterUseCase getFilterUseCase) {
+        return route(
+                GET("/filter/{category}").and(accept(MediaType.APPLICATION_JSON)),
+                request -> ServerResponse.ok()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(BodyInserters.fromPublisher(getFilterUseCase.apply(
+                                request.pathVariable("category")),
+                                QuestionDTO.class
+                        ))
+        );
+    }
+
 }

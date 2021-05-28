@@ -1,8 +1,6 @@
 package co.com.sofka.questions.routers;
 
-import co.com.sofka.questions.model.AnswerDTO;
 import co.com.sofka.questions.model.QuestionDTO;
-import co.com.sofka.questions.usecases.answer.AddAnswerUseCase;
 import co.com.sofka.questions.usecases.question.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

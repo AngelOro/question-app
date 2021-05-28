@@ -41,6 +41,19 @@ export function fetchOwnerQuestions(userId) {
     }
 }
 
+export function fetchQuestionFiltered(category) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(`${URL_BASE}/getCategory/${category}`)
+            const data = await response.json()
+            dispatch(success({ questions: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
 export function fetchQuestion(id) {
     return async dispatch => {
         dispatch(loading())

@@ -3,10 +3,12 @@ import { connect } from 'react-redux'
 
 import { fetchQuestionFiltered, fetchFilterQuestion, fetchQuestions } from '../actions/questionActions'
 import { Question } from '../components/Question'
+import Autocomplete from './Autocomplete';
 
 
 const QuestionsFilteredPage = ({ dispatch, loading, questions, hasErrors,match }) => {
-    const {category} = match.params
+    let titleQuestion = [];
+    const {category} = match.params  
     useEffect(() => {
         dispatch(fetchQuestionFiltered(category))
     }, [dispatch, category])
@@ -17,17 +19,25 @@ const QuestionsFilteredPage = ({ dispatch, loading, questions, hasErrors,match }
         
         return questions && questions.map(question => <Question key={question.id} question={question} excerpt />)
     }
+    const renderQuestions2 = () => {
+        if (loading) return <p>Loading questions...</p>
+        if (hasErrors) return <p>Unable to display questions.</p>
+        
+        return questions && questions.map(q => titleQuestion.push(q.question))
+                     
+    }
 
     return (
         <section>
             <h1>Questions</h1>
-            <input type="text" placeholder="Search " onChange={(e) => {
+            <Autocomplete suggestions={titleQuestion}    type="text" placeholder="Search " id="titleQuestion" 
+              onChange={(e) => {
                 if (e.target.value != null && e.target.value.trim() != ""){
                     dispatch(fetchFilterQuestion(e.target.value))
                 }else{
                     dispatch(fetchQuestions())
                 }
-            }} />
+            }}/>
             {renderQuestions()}
         </section>
     )

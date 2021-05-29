@@ -22,6 +22,8 @@ const QuestionsPage = ({ dispatch, loading, questions, hasErrors }) => {
             <input type="text" placeholder="Search " onChange={(e) => {
                 if (e.target.value != null && e.target.value.trim() != ""){
                     dispatch(fetchFilterQuestion(e.target.value))
+                }else{
+                    dispatch(fetchQuestions())
                 }
             }} />
             {renderQuestions()}

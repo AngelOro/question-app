@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchQuestionFiltered } from '../actions/questionActions'
+import { fetchQuestionFiltered, fetchFilterQuestion } from '../actions/questionActions'
 import { Question } from '../components/Question'
 
 
@@ -14,13 +14,18 @@ const QuestionsFilteredPage = ({ dispatch, loading, questions, hasErrors,match }
     const renderQuestions = () => {
        if (loading.question) return <p>Loading question...</p>
         if (hasErrors.question) return <p>Unable to display question.</p>
-
-         return questions.map(question => <Question key={question.id} question={question} excerpt />)
+        
+        return questions && questions.map(question => <Question key={question.id} question={question} excerpt />)
     }
 
     return (
         <section>
             <h1>Questions</h1>
+            <input type="text" placeholder="Search " onChange={(e) => {
+                if (e.target.value != null && e.target.value.trim() != ""){
+                    dispatch(fetchFilterQuestion(e.target.value))
+                }
+            }} />
             {renderQuestions()}
         </section>
     )

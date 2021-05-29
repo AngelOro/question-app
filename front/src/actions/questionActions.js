@@ -54,6 +54,19 @@ export function fetchQuestionFiltered(category) {
     }
 }
 
+export function fetchFilterQuestion(filter) {
+    return async dispatch => {
+        dispatch(loading())
+        try {
+            const response = await fetch(`${URL_BASE}/filter/${filter}`)
+            const data = await response.json()
+            dispatch(success({ questions: data, redirect: null }))
+        } catch (error) {
+            dispatch(failure())
+        }
+    }
+}
+
 export function fetchQuestion(id) {
     return async dispatch => {
         dispatch(loading())

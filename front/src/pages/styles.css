@@ -39,3 +39,8 @@ body {
   .suggestions li:not(:last-of-type) {
     border-bottom: 1px solid #999;
   }
+
+  .card-text:hover{
+    cursor: pointer;
+    color: #008f68;
+  }

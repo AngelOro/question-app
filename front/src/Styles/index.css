@@ -137,5 +137,6 @@ textarea {
   margin-right: 30px;
 }
 .card-text {
+  cursor: pointer;
   color: #6218b1;
 }

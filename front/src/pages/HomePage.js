@@ -5,7 +5,6 @@ const HomePage = () => (
   <section>
     <h1>Question and Answer</h1>
     <p>Welcome to the question and answer app.</p>
-    <p className="dev">Dev: Angélica Orozco</p>
     <Link to="/questions" className="button">
       View Questions
     </Link>

@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from "react";
-import './styles.css'
+import '../Styles/styles.css'
 import { fetchFilterQuestion, fetchQuestions } from '../actions/questionActions'
 
 class Autocomplete extends Component {
